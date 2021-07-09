@@ -1,0 +1,60 @@
+﻿@model Webb.Views.Domain.Order
+@{
+    ViewData["Title"] = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1 class="text-danger">Xóa đơn hàng</h1>
+<h3>Chắc chắn muốn xóa đơn hàng này?</h3>
+<div class="p-5 border rounded">
+    <h4>Đơn hàng</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <div class="form-group row">
+            <dt class="col-2">
+                @Html.DisplayNameFor(model => model.Name)
+            </dt>
+            <dd class="col-10">
+                @Html.DisplayFor(model => model.Name)
+            </dd>
+        </div>
+        <div class="form-group row">
+            <dt class="col-2">
+                @Html.DisplayNameFor(model => model.OrderDate)
+            </dt>
+            <dd class="col-10">
+                @Html.DisplayFor(model => model.OrderDate)
+            </dd>
+        </div>
+        <div class="form-group row">
+            <dt class="col-2">
+                @Html.DisplayNameFor(model => model.DiaChi)
+            </dt>
+            <dd class="col-10">
+                @Html.DisplayFor(model => model.DiaChi)
+            </dd>
+        </div>
+        <div class="form-group row">
+            <dt class="col-2">
+                @Html.DisplayNameFor(model => model.Phone)
+            </dt>
+            <dd class="col-10">
+                @Html.DisplayFor(model => model.Phone)
+            </dd>
+        </div>
+        <div class="form-group row">
+            <dt class="col-2">
+                @Html.DisplayNameFor(model => model.isConfirm)
+            </dt>
+            <dd class="col-10">
+                @Html.DisplayFor(model => model.isConfirm)
+            </dd>
+        </div>
+    </dl>
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="OrderId" />
+        <input type="submit" value="Xóa" class="btn btn-danger" />
+        <a asp-action="Index" class="btn btn-success">Quay về</a>
+    </form>
+</div>
+

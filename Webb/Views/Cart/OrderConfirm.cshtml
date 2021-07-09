@@ -1,0 +1,21 @@
+﻿@model Webb.Models.ProductToCart
+@{
+    ViewData["Title"] = "OrderConfirm";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<br />
+<h2 class="text-info">Đơn hàng đã được gửi đến người bán</h2>
+<div class="form-text">
+    Đơn hàng của bạn đã được gửi đến chúng tôi. Bộ phận bán hàng sẽ liên hệ với bạn sớm nhất để xác nhận đơn hàng. Nấu bạn có bất kỳ câu hỏi nào vui lòng liên hệ chúng tôi qua menu liên hệ ở phí trên!
+</div>
+<br />
+<partial name="~/Views/Shared/_OrderCustomerDetails.cshtml" model="Model.order" />
+<br />
+<partial name="~/Views/Shared/_OrderProductDetails.cshtml" model="Model.products" />
+<br />
+<div>
+    <a asp-controller="Home" asp-action="Index" class="btn btn-success">Trở về trang chủ</a>
+</div>
+
+

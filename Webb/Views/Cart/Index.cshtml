@@ -1,0 +1,144 @@
+﻿@model Webb.Models.ProductToCart
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<form method="post" enctype="multipart/form-data">
+    <br /> <br />
+    <div class="text-center"><h2>Your Shopping Cart</h2></div>
+    <br />
+    @if (Model.products.Count > 0)
+    {
+        <div class="container border border-secondary rounded" style="padding:15px;">
+
+            <div class="row">
+                <div class="col-8" style="border-right:1px solid green;">
+                    <table class="table table-striped" width="100">
+                        <tr class="table-info">
+                            <th style="text-align:center" width="25%"></th>
+                            <th style="text-align:center">
+                                <label asp-for="@Model.products.FirstOrDefault().ProductName"></label>
+                            </th>
+                            <th style="text-align:center">
+                                <label asp-for="@Model.products.FirstOrDefault().ProductPrice"></label>
+                            </th>
+                            <th style="text-align:center">
+                                <label asp-for="@Model.products.FirstOrDefault().Category"></label>
+                            </th>
+                            <th style="text-align:center">
+                                <label asp-for="@Model.products.FirstOrDefault().Color"></label>
+                            </th>
+                            <th style="text-align:center">
+
+                            </th>
+                        </tr>
+                        @foreach (var item in Model.products)
+                        {
+                            <tr style="padding:50px;">
+                                <td style="text-align:center;">
+                                    <a asp-controller="Detail" asp-action="Index" asp-route-id="@item.ProductId">
+                                        <img src="~/images/@item.ProductImage" with="25%" style="margin:auto;display:block;border-radius:3px; border:1px solid green;" />
+                                    </a>
+
+                                </td>
+                                <td style="text-align:center;">
+                                    @Html.DisplayFor(m => item.ProductName)
+                                </td>
+                                <td style="text-align:center;">
+                                    $@Html.DisplayFor(m => item.ProductPrice)
+                                </td>
+                                <td style="text-align:center;">
+                                    @Html.DisplayFor(m => item.CategoryId)
+                                </td>
+                                <td style="text-align:center;">
+                                    @Html.DisplayFor(m => item.Color)
+                                </td>
+                                <td style="text-align:center;">
+                                    <button type="submit" class="btn btn-danger" asp-action="Delete" asp-route-id="@item.ProductId">Delete</button>
+                                </td>
+                            </tr>
+                        }
+                        <tr style="padding:50px">
+                            <td colspan="2">Total</td>
+
+                            <td style="text-align:center">$@Model.products.Sum(i => i.ProductPrice)</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </table>
+
+                </div>
+                <div class="col-4" style="padding-left:30px;">
+
+                    <div class="form-group row">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="col-12">
+                            <lable>Name:</lable>
+                        </div>
+                        <div class="col-12" style="padding-bottom:15px;">
+                            <input asp-for="@Model.order.Name" class="form-control" />
+                            <span asp-validation-for="order.Name" class="text-danger"></span>
+                        </div>
+                        <div class="col-12">
+                            <lable>Phone:</lable>
+                        </div>
+                        <div class="col-12" style="padding-bottom:15px;">
+                            <input asp-for="@Model.order.Phone" class="form-control" />
+                            <span asp-validation-for="order.Phone" class="text-danger"></span>
+                        </div>
+                        <div class="col-12">
+                            <lable>địa chỉ:</lable>
+                        </div>
+                        <div class="col-12" style="padding-bottom:15px;">
+                            <input asp-for="@Model.order.DiaChi" class="form-control" />
+                            <span asp-validation-for="order.DiaChi" class="text-danger"></span>
+                        </div>
+                        <div class="col-12">
+                            <lable>Date:</lable>
+                        </div>
+                        <div class="col-12" style="padding-bottom:15px;">
+                            <input asp-for="@Model.order.OrderDate" value="" id="datepicker" class="form-control" />
+                            <span asp-validation-for="order.OrderDate" class="text-danger"></span>
+                        </div>
+                        <div class="col-12">
+                            <button type="submit" id="btnPlaceOrder" class="btn btn-success">Đặt hàng</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div>No Product add to the shopping cart </div>
+    }
+</form>
+@*<form method="post" asp-controller="Cart" asp-action="PaypalCheckout">
+    <input type="hidden" name="total" value="@Model.products.Sum(i => i.ProductPrice)" />
+    <input type="submit" />
+</form>*@
+@section scripts{
+    <script>
+
+
+        $('.timepicker').timepicker({
+            timeFormat: 'h:mm p',
+            interval: 60,
+            minTime: '10',
+            maxTime: '6:00pm',
+            startTime: '10:00',
+            dynamic: true,
+            dropdown: true,
+            scrollbar: true
+        });
+        $(function () {
+
+            $('#datepicker').datepicker({
+                minDate: +1, maxDate: "+3M"
+            });
+
+        });
+    </script>
+}

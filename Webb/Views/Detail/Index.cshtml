@@ -1,0 +1,224 @@
+﻿@model Webb.Models.ProductModels
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="col-md-8">
+    <div class="product-content-right">
+        <div class="product-breadcroumb">
+            <h1>  @Html.DisplayFor(model => model.ProductName)</h1>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="product-images">
+                    <div class="product-main-img">
+                        <img src="~/images/@Model.ProductImage" width="550" height="550" atl="image" />
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="product-inner">
+
+                    <h2 class="product-name"> @Html.DisplayFor(model => model.ProductName)</h2>
+                    <div class="product-inner-price">
+                        <ins> $@Html.DisplayFor(model => model.ProductPrice)</ins>
+                    </div>
+
+                    <form action="" class="cart">
+                        <div class="add-to-cart-link">
+                            <button asp-action="Buy" asp-controller="Cart" asp-route-id="@Model.ProductId" class="add_to_cart_button" type="submit">Add to cart</button>
+                        </div>
+                    </form>
+
+                    <div role="tabpanel">
+                        <ul class="product-tab" role="tablist">
+                            <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Description</a></li>
+                        </ul>
+                        <div class="tab-content">
+                            <div role="tabpanel" class="tab-pane fade in active" id="home">
+                                <h2>Product Description</h2>
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <dl class="row">
+                                            <dt class="col-sm-4">
+                                                @Html.DisplayNameFor(model => model.ProductName)
+                                            </dt>
+                                            <dd class="col-sm-6">
+                                                @Html.DisplayFor(model => model.ProductName)
+                                            </dd>
+                                            <dt class="col-sm-4">
+                                                @Html.DisplayNameFor(model => model.ProductPrice)
+                                            </dt>
+                                            <dd class="col-sm-8">
+                                                @Html.DisplayFor(model => model.ProductPrice)
+                                            </dd>
+                                            <dt class="col-sm-4">
+                                                @Html.DisplayNameFor(model => model.Descriptions)
+                                            </dt>
+                                            <dd class="col-sm-8">
+                                                @Html.DisplayFor(model => model.Descriptions)
+                                            </dd>
+                                            <dt class="col-sm-4">
+                                                @Html.DisplayNameFor(model => model.Screen)
+                                            </dt>
+                                            <dd class="col-sm-8">
+                                                @Html.DisplayFor(model => model.Screen)
+                                            </dd>
+                                            <dt class="col-sm-4">
+                                                @Html.DisplayNameFor(model => model.Color)
+                                            </dt>
+                                            <dd class="col-sm-8">
+                                                @Html.DisplayFor(model => model.Color)
+                                            </dd>
+                                            <dt class="col-sm-4">
+                                                @Html.DisplayNameFor(model => model.Chipset)
+                                            </dt>
+                                            <dd class="col-sm-8">
+                                                @Html.DisplayFor(model => model.Chipset)
+                                            </dd>
+                                            <dt class="col-sm-4">
+                                                @Html.DisplayNameFor(model => model.Frontcamera)
+                                            </dt>
+                                            <dd class="col-sm-8">
+                                                @Html.DisplayFor(model => model.Frontcamera)
+                                            </dd>
+                                            <dt class="col-sm-4">
+                                                @Html.DisplayNameFor(model => model.Rearcamera)
+                                            </dt>
+                                            <dd class="col-sm-8">
+                                                @Html.DisplayFor(model => model.Rearcamera)
+                                            </dd>
+                                            <dt class="col-sm-4">
+                                                @Html.DisplayNameFor(model => model.Ram)
+                                            </dt>
+                                            <dd class="col-sm-8">
+                                                @Html.DisplayFor(model => model.Ram)
+                                            </dd>
+                                            <dt class="col-sm-4">
+                                                @Html.DisplayNameFor(model => model.Batterycapacity)
+                                            </dt>
+                                            <dd class="col-sm-8">
+                                                @Html.DisplayFor(model => model.Batterycapacity)
+                                            </dd>
+                                        </dl>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>                   
+                </div>
+            </div>
+        </div>
+        <div class=" row">
+            <div class="col-md-7">                 
+                <div>
+                    @if (ViewBag.soluongcom > 0)
+                    {
+                        <h4 style="color: #2f7dfc; font-size: 48px; font-weight: bold;">@ViewBag.sumrating.ToString("0.0")</h4>
+                        <h6 style="color: #2a2a2a; margin-bottom: 0px; font-size: 14px; color: #797979; font-weight: normal;">(@ViewBag.soluongcom người đánh giá)</h6>
+                    }
+                </div>
+                <div class="col-md-7">
+                    <div class="review-list">
+                        @foreach (var a in ViewBag.dsdanhgia)
+                        {
+                        <div class="col-md-7">
+                            <p class="text-muted">@a.Created.ToString("dd/MM/yyyy hh:mm")</p>
+                            <p style="font-size:17px;">@a.User.FullName</p>
+                            @for (int i = 0; i < @a.Rating; i++)
+                            {
+                                <i class="ratingStar fas fa-star" style="color:#fd9727"></i>;
+                            }
+                            @for (int i = @a.Rating; i < 5; i++)
+                            {
+                                <i class="ratingStar fas fa-star" style="color:#dedddd"></i>;
+                            }
+                            <hr />
+                            <p style="font-size:15px;">@a.Content</p>
+                        </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class=" row">
+            <div class=" col-sm-6">
+                <h1>Comment</h1>
+            </div>
+            <div class="col-md-7">
+                @if (User.Identity.IsAuthenticated)
+                {
+                    @using (Html.BeginForm("CreateCM", "Detail", FormMethod.Post, new { onsubmit = "return VerifyRating()" }))
+                    {
+                <div class="form-group">
+                    <div onmouseout="CrateSelected()">
+                        <p>Đánh giá</p>
+                        <span class="text-warning">
+                            <i id="span1" onmouseout="CrateOut(1)" onmouseover="CrateOver(1)" onclick="CrateClick(1)" class="ratingStar far fa-star"></i>
+                            <i id="span2" onmouseout="CrateOut(2)" onmouseover="CrateOver(2)" onclick="CrateClick(2)" class="ratingStar far fa-star"></i>
+                            <i id="span3" onmouseout="CrateOut(3)" onmouseover="CrateOver(3)" onclick="CrateClick(3)" class="ratingStar far fa-star"></i>
+                            <i id="span4" onmouseout="CrateOut(4)" onmouseover="CrateOver(4)" onclick="CrateClick(4)" class="ratingStar far fa-star"></i>
+                            <i id="span5" onmouseout="CrateOut(5)" onmouseover="CrateOver(5)" onclick="CrateClick(5)" class="ratingStar far fa-star"></i>
+                        </span>
+                    </div>
+                    <hr />
+                    <textarea rows="8" name="content" class="form-control" placeholder="Viết bình luận ở đây." required></textarea>
+                </div>
+                        <input type="hidden" value="@Model.ProductId" name="productId" />                       
+                        <input type="submit" class="btn btn-success" value="BÌNH LUẬN" style=" border: 1px solid #0A98C0;
+        border-radius: 0;
+        background-color: white;
+        font-weight: bold;
+        color: #0A98C0;
+        padding: 13px 19px" />
+                        <div>
+                            <input type="hidden" name="rating" id="lblRating" value="0" />
+                        </div>
+                    }
+                }
+                else
+                {
+                    <h4>Bạn phải đăng nhập mới được bình luận</h4>
+                    <a asp-action="Login" asp-controller="Account" class="btn btn-primary" style="color: white; border: 1px solid #0A98C0; background-color: #0A98C0; font-weight: bold;">ĐĂNG NHẬP</a>
+                    <hr />
+                }
+            </div>          
+            </div>
+        <a asp-action="Index" asp-controller="Home">Back to List</a>
+    </div>
+</div>
+<script type="text/javascript">
+    function CrateOut(rating) {
+        for (var i = 1; i <= rating; i++) {
+            $("#span" + i).attr('class', 'far fa-star');
+        }
+    }
+    function CrateOver(rating) {
+        for (var i = 1; i <= rating; i++) {
+            $("#span" + i).attr('class', 'fas fa-star');
+        }
+    }
+    function CrateClick(rating) {
+        $("#lblRating").val(rating);
+        for (var i = 1; i <= rating; i++) {
+            $("#span" + i).attr('class', 'fas fa-star');
+        }
+        for (var i = rating + 1; i <= 5; i++) {
+            $("#span" + i).attr('class', 'far fa-star');
+        }
+    }
+    function CrateSelected() {
+        var rating = $("#lblRating").val();
+        for (var i = 1; i <= rating; i++) {
+            $("#span" + i).attr('class', 'fas fa-star');
+        }
+    }
+    function VerifyRating() {
+        var rating = $("#lblRating").val();
+        if (rating == "0") {
+            alert("chưa đánh giá chất lượng sản phẩm.");
+            return false;
+        }
+    }
+</script>

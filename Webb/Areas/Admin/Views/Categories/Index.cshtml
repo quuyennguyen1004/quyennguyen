@@ -1,0 +1,33 @@
+﻿@model IEnumerable<Webb.Views.Domain.Category>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Category</h1>
+
+<p>
+    <a class="btn btn-primary" asp-controller="Categories" asp-action="Create">Add</a>
+</p>
+<table class="table-bordered table">
+    <tr>
+        <th>Id</th>
+        <th>Catgory</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.CategoryId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CategoryName)
+            </td>
+            <td>
+                <a class="btn btn-danger" asp-action="Edit" asp-controller="Categories" asp-route-id="@item.CategoryId">Edit</a>|
+                <a class="btn btn-primary " asp-action="Delete" asp-controller="Categories" asp-route-id="@item.CategoryId">Delete</a>
+            </td>
+        </tr>
+    }
+</table>
+

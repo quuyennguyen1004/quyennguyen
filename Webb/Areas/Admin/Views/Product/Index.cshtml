@@ -1,0 +1,47 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model List<ProductModels>
+
+<h2>Count: @Model.Count</h2>
+
+<p>
+    <a class="btn btn-primary" asp-controller="Product" asp-action="Add">Add</a>
+</p>
+
+<table class="table-bordered table">
+
+<tr>
+    <th>Id</th>
+    <th>Product Image</th>
+    <th>Product Name</th>
+    <th>Product Quantity</th>
+    <th>Descriptions</th>
+    <th>Product Price</th>
+    <th>CategoryId</th>
+    <th>Create on</th>
+</tr>
+@foreach (var item in Model)
+{
+    <tr>
+        <td>@item.ProductId</td>
+        <td>
+            <img src="~/images/@item.ProductImage" class="img-thumbnail" style="width:150px;height:150px" />
+        </td>
+        <td>@item.ProductName</td>
+        <td>@item.ProductQuantity</td>
+        <td>@item.Descriptions</td>
+        <td>@item.ProductPrice.ToString("0.00")</td>
+        <td>@item.CategoryId</td>
+        <td>@item.CreateDate.ToString("dd/MM/yyyy")</td>
+        <td>
+            <a class="btn btn-danger" asp-controller="Product" asp-action="Edit" asp-route-id="@item.ProductId">Edit</a>|
+            <a class="btn btn-primary " asp-controller="Product" asp-action="Delete" asp-route-id="@item.ProductId">Delete</a>
+        </td>
+    </tr>
+}
+</table>
+

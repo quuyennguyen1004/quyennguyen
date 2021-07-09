@@ -1,0 +1,69 @@
+﻿@model Webb.Views.Domain.Order
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Chỉnh sửa đơn hàng</h1>
+<div class="row">
+    <div class="col-md-4">
+        <form method="post" asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="OrderId" />
+            <div class="form-group row">
+                <label asp-for="OrderDate" class="control-label"></label>
+                <input asp-for="OrderDate" id="datepicker" class="form-control" />
+                <span asp-validation-for="OrderDate" class="text-danger"></span>
+            </div>
+            <div class="form-group row">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group row">
+                <label asp-for="DiaChi" class="control-label"></label>
+                <input asp-for="DiaChi" class="form-control" />
+                <span asp-validation-for="DiaChi" class="text-danger"></span>
+            </div>
+            <div class="form-group row">
+                <label asp-for="Phone" class="control-label"></label>
+                <input asp-for="Phone" class="form-control" />
+                <span asp-validation-for="Phone" class="text-danger"></span>
+            </div>
+            <div class="form-group row">
+                <label class="form-check-label">
+                    @Html.DisplayNameFor(model => model.isConfirm) <input class="form-check-input" asp-for="isConfirm" />
+                </label>
+            </div>
+            <div class="form-group text-center">
+                <input type="submit" class="btn btn-primary" value="Cập nhật" />
+                <a asp-action="Index" class="btn btn-info">Quay về</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section scripts{
+    <script>
+
+
+        $('.timepicker').timepicker({
+            timeFormat: 'h:mm p',
+            interval: 60,
+            minTime: '10',
+            maxTime: '6:00pm',
+            startTime: '10:00',
+            dynamic: true,
+            dropdown: true,
+            scrollbar: true
+        });
+        $(function () {
+
+            $('#datepicker').datepicker({
+                minDate: +1, maxDate: "+3M"
+            });
+
+        });
+    </script>
+}
+

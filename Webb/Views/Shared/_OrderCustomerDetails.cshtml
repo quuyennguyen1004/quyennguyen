@@ -1,0 +1,40 @@
+﻿@model Webb.Views.Domain.Order
+
+<h4 class="text-success">Thông tin khách hàng</h4>
+
+<div style="height:100px; background-color:aliceblue" class="container border">
+    <div class="col-md-12">
+        <div class="row" style="padding-top:10px;">
+            <div class="col-md-2" style="padding-top:12px;">
+                Tên khách hàng
+            </div>
+            <div class="col-md-4">
+                <input asp-for="@Model.Name" readonly class="form-control" />
+            </div>
+            <div class="col-md-2" style="padding-top:12px;">
+                Địa chỉ khách hàng
+            </div>
+            <div class="col-md-4">
+                <input asp-for="@Model.DiaChi" readonly class="form-control" />
+            </div>
+
+        </div>
+    </div>
+    <div class="col-md-12">
+        <div class="row" style="padding-top:10px;">
+            <div class="col-md-2" style="padding-top:12px;">
+                Số điện thoại
+            </div>
+            <div class="col-md-4">
+                <input asp-for="@Model.Phone" readonly class="form-control" />
+            </div>
+            <div class="col-md-2" style="padding-top:12px;">
+                Ngày giao hàng
+            </div>
+            <div class="col-md-4">
+                <input asp-for="@Model.OrderDate" readonly class="form-control" />
+            </div>
+
+        </div>
+    </div>
+</div>
